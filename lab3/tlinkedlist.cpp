@@ -1,17 +1,14 @@
 #include "tlinkedlist.h"
 
-tT
-LT::TLinkedList() : beginning(nullptr), end(nullptr) {}
+TLinkedList::TLinkedList() : beginning(nullptr), end(nullptr) {}
 
-tT
-LT::TLinkedList(const TLinkedList &other)
+TLinkedList::TLinkedList(const TLinkedList &other)
 {
     beginning = other.beginning;
     end = other.end;
 }
 
-tT
-sT LT::First()
+ShOct TLinkedList::First()
 {
     if (beginning == nullptr) {
         std::cout << "The list is empty" << std::endl;
@@ -20,8 +17,7 @@ sT LT::First()
     return beginning->GetOctagon();
 }
 
-tT
-sT LT::Last()
+ShOct TLinkedList::Last()
 {
     if (end == nullptr) {
         std::cout << "The list is empty" << std::endl;
@@ -30,8 +26,7 @@ sT LT::Last()
     return end->GetOctagon();
 }
 
-tT
-sT LT::GetItem(size_t position)
+ShOct TLinkedList::GetItem(size_t position)
 {
     size_t n = this->Length();
     if (beginning == nullptr) {
@@ -48,33 +43,30 @@ sT LT::GetItem(size_t position)
     if (position == n) {
         return end->GetOctagon();
     }
-    sIT node = beginning;
+    ShItem node = beginning;
     for (size_t i = 1; i < position; ++i) {
         node = node->Right();
     }
     return node->GetOctagon();
 }
 
-tT
-bool LT::Empty()
+bool TLinkedList::Empty()
 {
     return (beginning == nullptr);
 }
 
-tT
-size_t LT::Length()
+size_t TLinkedList::Length()
 {
     size_t size = 0;
-    for (sIT i = beginning; i != nullptr; i = i->Right()) {
+    for (ShItem i = beginning; i != nullptr; i = i->Right()) {
         ++size;
     }
     return size;
 }
 
-tT
-void LT::InsertFirst(sT octagon)
+void TLinkedList::InsertFirst(ShOct octagon)
 {
-    sIT node(new IT(octagon));
+    ShItem node(new Item(octagon));
     if (beginning == nullptr) {
         beginning = (end = node);
         return;
@@ -85,10 +77,9 @@ void LT::InsertFirst(sT octagon)
     beginning = node;
 }
 
-tT
-void LT::InsertLast(sT octagon)
+void TLinkedList::InsertLast(ShOct octagon)
 {
-    sIT node(new IT(octagon));
+    ShItem node(new Item(octagon));
     if (beginning == nullptr) {
         beginning = (end = node);
         return;
@@ -99,8 +90,7 @@ void LT::InsertLast(sT octagon)
     end = node;
 }
 
-tT
-void LT::Insert(sT octagon, size_t position)
+void TLinkedList::Insert(ShOct octagon, size_t position)
 {
     size_t n = this->Length();
     if (position > n + 1) {
@@ -115,20 +105,19 @@ void LT::Insert(sT octagon, size_t position)
         InsertLast(octagon);
         return;
     }
-    sIT node(new IT(octagon));
-    sIT now = beginning;
+    ShItem node(new Item(octagon));
+    ShItem now = beginning;
     for (size_t i = 1; i < position; ++i) {
         now = now->Right();
     }
-    sIT before = now->Left();
+    ShItem before = now->Left();
     before->ToRight(node);
     now->ToLeft(node);
     node->ToLeft(before);
     node->ToRight(now);
 }
 
-tT
-void LT::RemoveFirst()
+void TLinkedList::RemoveFirst()
 {
     if (beginning == nullptr) {
         std::cout << "The list is empty" << std::endl;
@@ -138,13 +127,12 @@ void LT::RemoveFirst()
         beginning = (end = nullptr);
         return;
     }
-    sIT node = beginning;
+    ShItem node = beginning;
     beginning = beginning->Right();
     beginning->ToLeft(nullptr);
 }
 
-tT
-void LT::RemoveLast()
+void TLinkedList::RemoveLast()
 {
     if (end == nullptr) {
         std::cout << "The list is empty" << std::endl;
@@ -154,13 +142,12 @@ void LT::RemoveLast()
         beginning = (end = nullptr);
         return;
     }
-    sIT node = end;
+    ShItem node = end;
     end = end->Left();
     end->ToRight(nullptr);
 }
 
-tT
-void LT::Remove(size_t position)
+void TLinkedList::Remove(size_t position)
 {
     size_t n = this->Length();
     if (beginning == nullptr) {
@@ -179,24 +166,23 @@ void LT::Remove(size_t position)
         RemoveLast();
         return;
     }
-    sIT node = beginning;
+    ShItem node = beginning;
     for (size_t i = 1; i < position; ++i) {
         node = node->Right();
     }
-    sIT node_left = node->Left();
-    sIT node_right = node->Right();
+    ShItem node_left = node->Left();
+    ShItem node_right = node->Right();
     node_left->ToRight(node_right);
     node_right->ToLeft(node_left);
 }
 
-tT
-std::ostream &operator<<(std::ostream &os, const LT &list)
+std::ostream &operator<<(std::ostream &os, const TLinkedList &list)
 {
     if (list.beginning == nullptr) {
         os << "List is empty" << std::endl;
         return os;
     }
-    for (sIT i = list.beginning; i != nullptr; i = i->Right()) {
+    for (ShItem i = list.beginning; i != nullptr; i = i->Right()) {
         if (i->Right() != nullptr)
             os << i->GetOctagon()->Area() << " -> ";
         else
@@ -205,21 +191,16 @@ std::ostream &operator<<(std::ostream &os, const LT &list)
     return os;
 }
 
-tT
-void LT::Clear()
+void TLinkedList::Clear()
 {
     while (beginning != nullptr) {
         RemoveFirst();
     }
 }
 
-tT
-LT::~TLinkedList()
+TLinkedList::~TLinkedList()
 {
     while (beginning != nullptr) {
         RemoveFirst();
     }
 }
-
-template class TLinkedList<Octagon>;
-template std::ostream& operator<<(std::ostream& os, const TLinkedList<Octagon>& list);

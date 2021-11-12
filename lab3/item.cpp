@@ -1,62 +1,48 @@
 #include "item.h"
 
-tT
-IT::Item(const sT &o)
+Item::Item(const ShOct &o)
 {
     this->octagon = o;
     this->next = nullptr;
     this->prev = nullptr;
 }
 
-tT
-IT::Item(const IT &other)
+Item::Item(const Item &other)
 {
     this->octagon = other.octagon;
     this->next = other.next;
     this->prev = other.prev;
 }
 
-tT
-sIT IT::Left()
+ShItem Item::Left()
 {
     return this->prev;
 }
 
-
-tT
-sIT IT::Right()
+ShItem Item::Right()
 {
     return this->next;
 }
 
-tT
-void IT::ToLeft(sIT node)
+void Item::ToLeft(ShItem node)
 {
     this->prev = node;
 }
 
-tT
-void IT::ToRight(sIT node)
+void Item::ToRight(ShItem node)
 {
     this->next = node;
 }
 
-
-tT
-sT IT::GetOctagon() const
+ShOct Item::GetOctagon()
 {
     return this->octagon;
 }
 
-tT
-std::ostream &operator<<(std::ostream &os, const IT& node)
+std::ostream &operator<<(std::ostream &os, const Item &node)
 {
     os << node.octagon << std::endl;
     return os;
 }
 
-tT
-IT::~Item() {}
-
-template class Item<Octagon>;
-template std::ostream& operator<<(std::ostream& os, const Item<Octagon>& item);
+Item::~Item() {}
