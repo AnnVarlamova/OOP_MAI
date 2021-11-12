@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    TLinkedList l;
+    TLinkedList<Octagon> l;
     Point x1(3, 1);
     Point x2(2, 4);
     Point x3(4, 8);
@@ -30,15 +30,16 @@ int main(void)
     Point z7(6, 1);
     Point z8(4, 0);
 
-    ShOct o1(new Octagon(x1, x2, x3, x4, x5, x6, x7, x8));
-    ShOct o2(new Octagon(y1, y2, y3, y4, y5, y6, y7, y8));
-    ShOct o3(new Octagon(z1, z2, z3, z4, z5, z6, z7, z8));
+    std::shared_ptr<Octagon> o1(new Octagon(x1, x2, x3, x4, x5, x6, x7, x8));
+    std::shared_ptr<Octagon> o2(new Octagon(y1, y2, y3, y4, y5, y6, y7, y8));
+    std::shared_ptr<Octagon> o3(new Octagon(z1, z2, z3, z4, z5, z6, z7, z8));
 
-    /*ShOct o1(new Octagon);
-    ShOct o2(new Octagon);
-    ShOct o3(new Octagon);
+    /*std::shared_ptr<Octagon> o1(new Octagon);
+    std::shared_ptr<Octagon> o2(new Octagon);
+    std::shared_ptr<Octagon> o3(new Octagon);
     std::cin >> *o1 >> *o2 >> *o3;*/
     l.Remove(5);
+    std::cout << l.Empty() << std::endl;
     l.Insert(o1, 1);
     std::cout << l << std::endl;
     l.Insert(o1, 2);
@@ -53,7 +54,7 @@ int main(void)
     std::cout << l << std::endl;
     l.Insert(o2, 1);
     std::cout << l << std::endl;
-
+    std::cout << l.Empty() << std::endl;
     l.Remove(5);
     std::cout << l << std::endl;
     std::cout << l.Length() << std::endl;
@@ -69,5 +70,6 @@ int main(void)
     std::cout << *l.GetItem(2) << std::endl;
     std::cout << *l.GetItem(3) << std::endl;
     std::cout << *l.GetItem(4) << std::endl;
+    std::cout << *l.Last() << std::endl;
     return 0;
 }

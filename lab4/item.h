@@ -1,34 +1,40 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#define tT template <typename T>
+#define sIT std::shared_ptr<Item<T>>
+#define sT std::shared_ptr<T>
+#define IT Item<T>
+#define sI std::shared_ptr<Item>
+
 #include "octagon.h"
 #include <memory>
+#include <iostream>
 
-#define ShOct std::shared_ptr<Octagon>
-#define ShItem std::shared_ptr<Item>
-
+tT
 class Item
 {
 public:
-    Item(const ShOct &s);
+    Item(const sT &s);
     Item(const Item &other);
 
-    ShItem Left();
-    ShItem Right();
+    sI Left();
+    sI Right();
     
-    void ToLeft(ShItem node);
-    void ToRight(ShItem node);
+    void ToLeft(sI node);
+    void ToRight(sI node);
 
-    ShOct GetOctagon();
+    sT GetOctagon() const;
 
-    friend std::ostream &operator<<(std::ostream &os, const Item& node);
+    template <class O>
+    friend std::ostream &operator<<(std::ostream &os, const Item<O> &node);
 
     virtual ~Item();
 
 private:
-    ShOct octagon;
-    ShItem prev;
-    ShItem next;
+    sT octagon;
+    sIT prev;
+    sIT next;
 };
 
 #endif // ITEM_H

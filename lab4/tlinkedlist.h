@@ -1,37 +1,41 @@
 #ifndef TLINKEDLIST_H
 #define TLINKEDLIST_H
 
+#define LT TLinkedList<T>
+
 #include "item.h"
 
+tT
 class TLinkedList
 {
 public:
     TLinkedList();
-    TLinkedList(const TLinkedList &other);
+    TLinkedList(const LT &other);
 
-    ShOct First();
-    ShOct Last();
-    ShOct GetItem(size_t idx);
+    sT First();
+    sT Last();
+    sT GetItem(size_t idx);
 
     size_t Length();
     bool Empty();
 
-    void InsertFirst(ShOct octagon);
-    void InsertLast(ShOct octagon);
-    void Insert(ShOct octagon, size_t position);
+    void InsertFirst(sT octagon);
+    void InsertLast(sT octagon);
+    void Insert(sT octagon, size_t position);
 
     void RemoveFirst();
     void RemoveLast();
     void Remove(size_t position);
 
-    friend std::ostream &operator<<(std::ostream &os, const TLinkedList &list);
+    template <class I>
+    friend std::ostream &operator<<(std::ostream &os, const TLinkedList<I> &list);
 
     void Clear();
     virtual ~TLinkedList();
 
 private:
-    ShItem beginning;
-    ShItem end;
+    sIT beginning;
+    sIT end;
 };
 
 #endif // TLINKEDLIST_H
