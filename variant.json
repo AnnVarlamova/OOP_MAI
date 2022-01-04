@@ -10,11 +10,14 @@
     "TLinkedList"
   ],
   "finished_labs": {
+    "lab0.1:5": "lab0.1",
+    "lab0.2:5": "lab0.2",
     "lab1:5": "lab1",
-    "lab2": "lab2",
-    "lab3": "lab3",
+    "lab2:4": "lab2",
+    "lab3:4": "lab3",
     "lab4:4": "lab4",
-    "lab5:4": "lab5"
+    "lab5:4": "lab5",
+    "lab6:5": "lab6"
   },
   "reports": [
     "lab1"
